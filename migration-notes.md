@@ -120,12 +120,10 @@ CREATE UNIQUE INDEX "certificate_studentid_courseid_key" ON "certificate"("stude
 ```
 
 > 📸 **СКРІНШОТ 2** — Вивід терміналу після виконання міграції 1  
-> _(зробіть скріншот де видно "Applying migration `20260507115809_add_certificate_table`" та "Your database is now in sync with your schema")_  
-> ![migration 1 result](screenshots/02_migration1_certificate.png)
+><img width="1740" height="584" alt="Screenshot 2026-05-07 145818" src="https://github.com/user-attachments/assets/0fb3ae52-b3c5-46af-937a-87ab73e7c6d7" />
 
 > 📸 **СКРІНШОТ 3** — Таблиця `certificate` у pgAdmin  
-> _(у pgAdmin розкрийте Tables → certificate → правою кнопкою → View/Edit Data → All Rows)_  
-> ![certificate table pgAdmin](screenshots/03_certificate_table_pgadmin.png)
+<img width="705" height="136" alt="image" src="https://github.com/user-attachments/assets/c19daa2b-3436-4d99-8839-52a33e1272de" />
 
 ---
 
@@ -170,12 +168,10 @@ ALTER TABLE "course" ADD COLUMN "ispublished" BOOLEAN NOT NULL DEFAULT false;
 ```
 
 > 📸 **СКРІНШОТ 4** — Вивід терміналу після виконання міграції 2  
-> _(зробіть скріншот де видно "Applying migration `20260507115916_add_course_ispublished`" та "Your database is now in sync with your schema")_  
-> ![migration 2 result](screenshots/04_migration2_ispublished.png)
+<img width="1756" height="595" alt="Screenshot 2026-05-07 145927" src="https://github.com/user-attachments/assets/61bb9da5-f075-4d02-94ae-578388c02eba" />
 
 > 📸 **СКРІНШОТ 5** — Таблиця `course` у pgAdmin з новим полем `ispublished`  
-> _(у pgAdmin виконайте `SELECT courseid, title, ispublished FROM course;` і зробіть скріншот результату)_  
-> ![course ispublished pgAdmin](screenshots/05_course_ispublished_pgadmin.png)
+<img width="1568" height="294" alt="image" src="https://github.com/user-attachments/assets/55237e70-e7ce-424e-a079-11d48d2bede8" />
 
 ---
 
@@ -222,12 +218,10 @@ ALTER TABLE "module" DROP COLUMN "contenturl";
 ```
 
 > 📸 **СКРІНШОТ 6** — Вивід терміналу після виконання міграції 3  
-> _(зробіть скріншот де видно "Applying migration `20260507120049_drop_module_contenturl`" та "Your database is now in sync with your schema")_  
-> ![migration 3 result](screenshots/06_migration3_drop_contenturl.png)
+<img width="2177" height="813" alt="Screenshot 2026-05-07 150054" src="https://github.com/user-attachments/assets/dfa96513-abd8-40f4-b8e5-7b2cf08d1721" />
 
 > 📸 **СКРІНШОТ 7** — Таблиця `module` у pgAdmin без поля `contenturl`  
-> _(у pgAdmin виконайте `SELECT * FROM module LIMIT 5;` і зробіть скріншот — поля `contenturl` не повинно бути)_  
-> ![module table pgAdmin](screenshots/07_module_no_contenturl_pgadmin.png)
+<img width="867" height="629" alt="image" src="https://github.com/user-attachments/assets/dcaffd02-08cc-447d-802f-74313cfec6f7" />
 
 ---
 
@@ -304,11 +298,6 @@ main()
 Опубліковані курси:
 - Python для початківців
 ```
-
-> 📸 **СКРІНШОТ 8** — Вивід терміналу після запуску `npx tsx seed.ts`  
-> _(зробіть скріншот терміналу з повним виводом скрипту — це головний доказ коректної роботи)_  
-> ![seed.ts output](screenshots/08_seed_output.png)
-
 ---
 
 ## Структура папки `prisma/migrations/`
@@ -327,9 +316,8 @@ prisma/
         └── migration.sql
 ```
 
-> 📸 **СКРІНШОТ 9** — Структура папки `prisma/migrations/` у VS Code або провіднику  
-> _(зробіть скріншот лівої панелі VS Code де видно всі 4 підпапки міграцій)_  
-> ![migrations folder](screenshots/09_migrations_folder.png)
+> 📸 **СКРІНШОТ 9** — Структура папки `prisma/migrations/` у VS Code 
+<img width="639" height="470" alt="image" src="https://github.com/user-attachments/assets/419f79f8-dfe8-45d7-9193-fa48be57be05" />
 
 ---
 
