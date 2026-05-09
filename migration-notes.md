@@ -24,8 +24,7 @@
 Початкова міграція `20260507113715_init` зафіксувала цей стан у папці `prisma/migrations/`.
 
 > 📸 **СКРІНШОТ 1** — Вивід терміналу після виконання `npx prisma db pull`  
-> _(зробіть скріншот терміналу де видно "Introspected 8 models and wrote them into prisma\schema.prisma")_  
-> ![db pull result](screenshots/01_prisma_db_pull.png)
+> <img width="2851" height="814" alt="Screenshot 2026-05-07 143054" src="https://github.com/user-attachments/assets/589c6866-45f6-4173-b33d-7e4e4b6121c2" />
 
 ---
 
