@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\prisma",
+    "\\prisma\\migrations",
+    "\\prisma\\migrations\\20260507113715_init",
+    "\\prisma\\migrations\\20260507115809_add_certificate_table",
+    "\\prisma\\migrations\\20260507115916_add_course_ispublished",
+    "\\prisma\\migrations\\20260507120049_drop_module_contenturl"
+  ],
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,110 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  userid           Int         @id @default(autoincrement())
+  firstname        String      @db.VarChar(50)
+  lastname         String      @db.VarChar(50)
+  email            String      @unique @db.VarChar(100)
+  password         String      @db.VarChar(255)
+  registrationdate DateTime    @default(dbgenerated("CURRENT_DATE")) @db.Date
+  instructor       instructor?
+  student          student?
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model course {
+  courseid     Int          @id @default(autoincrement())
+  title        String       @db.VarChar(150)
+  description  String?
+  price        Decimal      @default(0) @db.Decimal(8, 2)
+  instructorid Int
+  ispublished  Boolean  @default(false)
+  instructor   instructor   @relation(fields: [instructorid], references: [userid], onUpdate: NoAction)
+  enrollment   enrollment[]
+  module       module[]
+  review       review[]
+  certificate   certificate[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model enrollment {
+  enrollmentid Int      @id @default(autoincrement())
+  studentid    Int
+  courseid     Int
+  enrolldate   DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  progress     Decimal  @default(0) @db.Decimal(5, 2)
+  course       course   @relation(fields: [courseid], references: [courseid], onDelete: Cascade, onUpdate: NoAction)
+  student      student  @relation(fields: [studentid], references: [userid], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([studentid, courseid])
+}
+
+model expertisearea {
+  expertiseid   Int          @id @default(autoincrement())
+  expertisename String       @unique @db.VarChar(100)
+  instructor    instructor[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model instructor {
+  userid        Int           @id
+  bio           String?
+  expertiseid   Int
+  rating        Decimal?      @db.Decimal(3, 2)
+  course        course[]
+  expertisearea expertisearea @relation(fields: [expertiseid], references: [expertiseid], onDelete: NoAction, onUpdate: NoAction)
+  User          User          @relation(fields: [userid], references: [userid], onDelete: Cascade, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model module {
+  moduleid    Int     @id @default(autoincrement())
+  courseid    Int
+  title       String  @db.VarChar(150)
+  ordernumber Int
+  course      course  @relation(fields: [courseid], references: [courseid], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([courseid, ordernumber])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model review {
+  reviewid    Int      @id @default(autoincrement())
+  courseid    Int
+  studentid   Int
+  rating      Int
+  commenttext String?
+  reviewdate  DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  course      course   @relation(fields: [courseid], references: [courseid], onDelete: Cascade, onUpdate: NoAction)
+  student     student  @relation(fields: [studentid], references: [userid], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([studentid, courseid])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model student {
+  userid        Int          @id
+  academiclevel String       @db.VarChar(50)
+  totalpoints   Int          @default(0)
+  enrollment    enrollment[]
+  review        review[]
+  certificate   certificate[]
+  User          User         @relation(fields: [userid], references: [userid], onDelete: Cascade, onUpdate: NoAction)
+}
+model certificate {
+  certificateid Int      @id @default(autoincrement())
+  issuedate     DateTime @default(now()) @db.Date
+  studentid     Int
+  courseid      Int
+  student       student  @relation(fields: [studentid], references: [userid], onDelete: Cascade, onUpdate: NoAction)
+  course        course   @relation(fields: [courseid], references: [courseid], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([studentid, courseid])
+}
